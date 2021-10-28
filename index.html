@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script type="text/javascript" src="https://leaverou.github.io/prefixfree/prefixfree.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Montserrat:100');
+
+        body {
+            background: #eee url('https://cdn.vox-cdn.com/uploads/chorus_asset/file/22661965/img19.jpg') no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            margin: 0;
+            height: 100vh;
+        }
+
+        ::selection {
+            background: none;
+        }
+
+        img {
+            width: 14vw;
+            position: absolute;
+            cursor: pointer;
+        }
+
+        #t {
+            position: absolute;
+        }
+
+        #task {
+            margin-top: 92.5vh;
+            width: 100%;
+            postion: fixed;
+        }
+
+        #app {
+            background: #0a0a0a;
+            height: 100vh;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(rgba(10, 10, 10, .6), rgba(0, 0, 0, .9)), repeating-linear-gradient(0, transparent, transparent 2px, black 3px, black 3px), url('https://images.unsplash.com/photo-1506399558188-acca6f8cbf41?ixlib=rb-0.3.5&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjE0NTg5fQ&s=7118759521e3184778a3b5e010e202c6');
+            background-size: cover;
+            background-position: center;
+            z-index: 1;
+        }
+
+        #wrapper {
+            text-align: center;
+        }
+
+        .sub {
+            color: #64dcdc;
+            letter-spacing: 1em;
+        }
+
+        /* Our mixin positions a copy of our text directly on our existing text, while also setting content to the appropriate text set in the data-text attribute. */
+        .glitch {
+            position: absolute;
+            color: red;
+            font-size: 1.5em;
+            letter-spacing: 0.5em;
+            /* Animation provies a slight random skew. Check bottom of doc for more information on how to random skew. */
+            animation: glitch-skew 1s infinite linear alternate-reverse;
+            margin-top: 20vh;
+            background-color: #DDDDDD;
+            padding: 10px;
+            border-radius: 5px 5px 0 0;
+            float: right;
+            -moz-transform: rotate(270deg);
+            /* FF3.5+ */
+            -o-transform: rotate(270deg);
+            /* Opera 10.5 */
+            -webkit-transform: rotate(-90deg);
+            /* Saf3.1+, Chrome */
+            -moz-transform-origin: 100% 100%;
+            -o-transform-origin: 100% 100%;
+            -webkit-transform-origin: 100% 100%;
+        }
+
+        .glitch::before {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            left: 2px;
+            text-shadow: -2px 0 #ff00c1;
+            /* Creates an initial clip for our glitch. This works in a typical top,right,bottom,left fashion and creates a mask to only show a certain part of the glitch at a time. */
+            clip: rect(44px, 450px, 56px, 0);
+            /* Runs our glitch-anim defined below to run in a 5s loop, infinitely, with an alternating animation to keep things fresh. */
+            animation: glitch-anim 5s infinite linear alternate-reverse;
+        }
+
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            left: -2px;
+            text-shadow: -2px 0 #00fff9, 2px 2px #ff00c1;
+            animation: glitch-anim2 1s infinite linear alternate-reverse;
+        }
+
+        /* Creates an animation with 20 steaps. For each step, it calculates a percentage for the specific step. It then generates a random clip box to be used for the random glitch effect. Also adds a very subtle skew to change the 'thickness' of the glitch.*/
+        @keyframes glitch-anim {
+            0% {
+                clip: rect(94px, 9999px, 80px, 0);
+                transform: skew(0.78deg);
+            }
+
+            5% {
+                clip: rect(90px, 9999px, 42px, 0);
+                transform: skew(0.14deg);
+            }
+
+            10% {
+                clip: rect(55px, 9999px, 75px, 0);
+                transform: skew(0.15deg);
+            }
+
+            15% {
+                clip: rect(10px, 9999px, 69px, 0);
+                transform: skew(0.09deg);
+            }
+
+            20% {
+                clip: rect(98px, 9999px, 93px, 0);
+                transform: skew(0.7deg);
+            }
+
+            25% {
+                clip: rect(92px, 9999px, 35px, 0);
+                transform: skew(0.68deg);
+            }
+
+            30% {
+                clip: rect(60px, 9999px, 82px, 0);
+                transform: skew(0.5deg);
+            }
+
+            35% {
+                clip: rect(42px, 9999px, 24px, 0);
+                transform: skew(0.59deg);
+            }
+
+            40% {
+                clip: rect(85px, 9999px, 99px, 0);
+                transform: skew(0.44deg);
+            }
+
+            45% {
+                clip: rect(22px, 9999px, 59px, 0);
+                transform: skew(0.93deg);
+            }
+
+            50% {
+                clip: rect(10px, 9999px, 95px, 0);
+                transform: skew(0.32deg);
+            }
+
+            55% {
+                clip: rect(57px, 9999px, 1px, 0);
+                transform: skew(0.44deg);
+            }
+
+            60% {
+                clip: rect(18px, 9999px, 69px, 0);
+                transform: skew(0.3deg);
+            }
+
+            65% {
+                clip: rect(47px, 9999px, 12px, 0);
+                transform: skew(0.72deg);
+            }
+
+            70% {
+                clip: rect(46px, 9999px, 86px, 0);
+                transform: skew(0.25deg);
+            }
+
+            75% {
+                clip: rect(72px, 9999px, 87px, 0);
+                transform: skew(0.65deg);
+            }
+
+            80% {
+                clip: rect(93px, 9999px, 42px, 0);
+                transform: skew(0.5deg);
+            }
+
+            85% {
+                clip: rect(36px, 9999px, 84px, 0);
+                transform: skew(0.88deg);
+            }
+
+            90% {
+                clip: rect(86px, 9999px, 53px, 0);
+                transform: skew(0.35deg);
+            }
+
+            95% {
+                clip: rect(68px, 9999px, 47px, 0);
+                transform: skew(0.35deg);
+            }
+
+            100% {
+                clip: rect(30px, 9999px, 50px, 0);
+                transform: skew(0.15deg);
+            }
+        }
+
+        @keyframes glitch-anim2 {
+            0% {
+                clip: rect(61px, 9999px, 94px, 0);
+                transform: skew(0.93deg);
+            }
+
+            5% {
+                clip: rect(1px, 9999px, 36px, 0);
+                transform: skew(0.79deg);
+            }
+
+            10% {
+                clip: rect(92px, 9999px, 85px, 0);
+                transform: skew(0.64deg);
+            }
+
+            15% {
+                clip: rect(13px, 9999px, 41px, 0);
+                transform: skew(0.06deg);
+            }
+
+            20% {
+                clip: rect(50px, 9999px, 98px, 0);
+                transform: skew(0.61deg);
+            }
+
+            25% {
+                clip: rect(79px, 9999px, 4px, 0);
+                transform: skew(0.84deg);
+            }
+
+            30% {
+                clip: rect(55px, 9999px, 99px, 0);
+                transform: skew(0.7deg);
+            }
+
+            35% {
+                clip: rect(2px, 9999px, 75px, 0);
+                transform: skew(0.02deg);
+            }
+
+            40% {
+                clip: rect(95px, 9999px, 16px, 0);
+                transform: skew(0.45deg);
+            }
+
+            45% {
+                clip: rect(26px, 9999px, 44px, 0);
+                transform: skew(0.83deg);
+            }
+
+            50% {
+                clip: rect(36px, 9999px, 16px, 0);
+                transform: skew(0.97deg);
+            }
+
+            55% {
+                clip: rect(98px, 9999px, 17px, 0);
+                transform: skew(0.05deg);
+            }
+
+            60% {
+                clip: rect(39px, 9999px, 48px, 0);
+                transform: skew(0.55deg);
+            }
+
+            65% {
+                clip: rect(82px, 9999px, 83px, 0);
+                transform: skew(0.74deg);
+            }
+
+            70% {
+                clip: rect(57px, 9999px, 91px, 0);
+                transform: skew(0.37deg);
+            }
+
+            75% {
+                clip: rect(83px, 9999px, 52px, 0);
+                transform: skew(0.27deg);
+            }
+
+            80% {
+                clip: rect(7px, 9999px, 45px, 0);
+                transform: skew(0.71deg);
+            }
+
+            85% {
+                clip: rect(39px, 9999px, 54px, 0);
+                transform: skew(0.48deg);
+            }
+
+            90% {
+                clip: rect(13px, 9999px, 54px, 0);
+                transform: skew(0.78deg);
+            }
+
+            95% {
+                clip: rect(77px, 9999px, 27px, 0);
+                transform: skew(0.64deg);
+            }
+
+            100% {
+                clip: rect(80px, 9999px, 95px, 0);
+                transform: skew(0.54deg);
+            }
+        }
+
+        @keyframes glitch-skew {
+            0% {
+                transform: skew(-3deg);
+            }
+
+            10% {
+                transform: skew(5deg);
+            }
+
+            20% {
+                transform: skew(0deg);
+            }
+
+            30% {
+                transform: skew(3deg);
+            }
+
+            40% {
+                transform: skew(4deg);
+            }
+
+            50% {
+                transform: skew(-3deg);
+            }
+
+            60% {
+                transform: skew(1deg);
+            }
+
+            70% {
+                transform: skew(-1deg);
+            }
+
+            80% {
+                transform: skew(4deg);
+            }
+
+            90% {
+                transform: skew(0deg);
+            }
+
+            100% {
+                transform: skew(0deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <audio id="myAudio">
+        <source src="https://www.myinstants.com/media/sounds/erro.mp3" type="audio/mpeg">
+    </audio>
+
+    <audio id="myAudio2">
+        <source src="https://www.myinstants.com/media/sounds/musica_1.mp3" type="audio/mpeg">
+    </audio>
+    <img src="https://www.easeus.com/images/en/screenshot/partition-manager/processor-is-not-supported-for-windows-11.png"
+        alt="" onclick='err()' id='t' />
+    <img src="https://i.ibb.co/w0kYDq4/Screenshot-2021-10-28-232059.png" alt="" id='task' />
+    <img src="" alt="" />
+</body>
+<script>
+    var count = 0;
+    var x = 0;
+    function err() {
+        if (count > 1) {
+            document.getElementById("myAudio").pause();
+            document.getElementById("myAudio").play();
+        } else {
+            document.getElementById("myAudio").play();
+        }
+        var elem = document.createElement('img');
+        elem.setAttribute('src', 'https://www.easeus.com/images/en/screenshot/partition-manager/processor-is-not-supported-for-windows-11.png');
+        elem.setAttribute('onclick', 'err()');
+        elem.style.marginTop = Math.floor(Math.random() * 75) + 'vh';
+        elem.style.marginLeft = Math.floor(Math.random() * 86) + 'vw';
+        document.body.appendChild(elem);
+        count++;
+        if (count == 4) {
+            document.getElementById("myAudio2").play();
+            crash();
+        }
+    }
+    document.addEventListener('mousedown', function () {
+        if (count < 4) {
+            document.getElementById("myAudio").play();
+        }
+    });
+    function bsod() {
+        var all = document.getElementsByTagName("img");
+        for (var i = 0; i < all.length; i++) {
+            all[i].style.display = 'none';
+        }
+        document.body.style.background = 'rgb(0, 1, 171) url("http://cdn.wallpapersafari.com/39/11/eY6wEW.png") no-repeat';
+        var gif2 = document.createElement('img');
+        gif2.setAttribute('src', 'https://c.tenor.com/i_K3zWsgcG8AAAAi/hacker-pepe.gif');
+        gif2.style.marginTop = '80vh';
+        document.body.appendChild(gif2);
+        var link = document.createElement('a')
+        link.setAttribute('href', 'https://www.linkedin.com/in/lazycoderr');
+        var marquee = document.createElement('h1');
+        marquee.innerHTML = "WWW.LINKEDIN.COM/IN/LAZYCODERR"
+        marquee.className = 'glitch'
+        link.appendChild(marquee)
+        document.body.appendChild(link);
+    }
+    function crash() {
+        setTimeout(function () {
+            var spam = document.createElement('img');
+            spam.setAttribute('src', 'https://www.easeus.com/images/en/screenshot/partition-manager/processor-is-not-supported-for-windows-11.png');
+            spam.style.marginTop = Math.floor(Math.random() * 75) + 'vh';
+            spam.style.marginLeft = Math.floor(Math.random() * 86) + 'vw';
+            document.body.appendChild(spam);
+            x++;
+            if (x < 160) {
+                crash();
+            } else {
+                bsod();
+            }
+        }, 50)
+    }
+</script>
+
+</html>
